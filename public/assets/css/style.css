@@ -1,4 +1,9 @@
-      body { background-color: #F2F6D0 }
+
+      #main-page, #saved-page {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+              url("../img/stack-of-newspapers.jpg");
+      }
+
       #wrapper {
         width: 960px;
         margin-left: auto;
@@ -27,4 +32,11 @@
       textarea {
         height: 200px;
         font-size: 18px;
+      }
+
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 40px 0;
       }
