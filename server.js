@@ -11,7 +11,6 @@ var axios = require("axios");
 var cheerio = require("cheerio");
 
 // Require all models
-var db = require("./models");
 var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
@@ -25,9 +24,10 @@ var app = express();
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
-// Parse request body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 // Make public a static folder
 app.use(express.static("public"));
 
@@ -36,13 +36,14 @@ var exphbs = require("express-handlebars")
 
 app.engine("handlebars", exphbs({
   defaultLayout: "main",
-  partialsDir: path.join(__dirname, "/views/index")
 }));
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
-
+// Database configuration with mongoose
+var URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/scraper'; 
+mongoose.connect(URI);
+var db = mongoose.connection;
 // Routes
 
 ////////////////////////ROUTES TO MAIN PAGE
@@ -66,14 +67,14 @@ app.get("/saved", function (req, res) {
 });
 
 // A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
+app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with axios
-  axios.get("http://www.nytimes.com/section/world").then(function(response) {
+  axios.get("https://www.nytimes.com/section/world").then(function (response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("div.story-body").each(function(i, element) {
+    $("div.story-body").each(function (i, element) {
       // Save an empty result object
       var result = {};
 

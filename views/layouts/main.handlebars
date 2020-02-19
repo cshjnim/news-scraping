@@ -11,7 +11,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!--CSS Link -->
-    <link rel="stylesheet" href="../../public/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <!--Linking jQuery-->
@@ -20,6 +20,20 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home</a>
+                <a class="nav-item nav-link" href="/saved">Saved articles</a>
+                <a class="btn btn-danger" id="scrape-btn">Scrape the News!</a>
+                <p>" "</p>
+                <a class="btn btn-danger" id="delete-btn">Delete unsaved articles?</a>
+
+            </div>
+        </div>
+    </nav>
+
     {{{ body }}}
 
     <footer>
