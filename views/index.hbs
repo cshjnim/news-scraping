@@ -12,7 +12,7 @@
   </div>
 {{/if}}
 
-<div class="container article-container">
+<div class="container article-container main-page">
   {{!-- displays articles from the db if there are any --}}
   {{#if articles.length}}
      {{!-- Stores saved articles when the scrape button is pressed --}}
@@ -28,7 +28,6 @@
             <h3 class="mb-2">
               <a href="{{link}}" target="_blank">{{title}}</a> 
             </h3>
-            <p class="mb-2">{{excerpt}}</p>
             <button type="button" class="btn save-article" data-id="{{_id}}">Save Article</button>
           </div>
         </div>

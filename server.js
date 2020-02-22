@@ -1,12 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Handlebars = require('handlebars')
 const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const { check, validationResult } = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+ 
 
 // Initialize Express
 const app = express();
@@ -60,10 +63,12 @@ app.engine(
       ifEquals: function(arg1, arg2, options) {
         return arg1 == arg2 ? options.fn(this) : options.inverse(this);
       }
-    }
+    },
+    hbs: allowInsecurePrototypeAccess(Handlebars)
   })
 );
 app.set('view engine', '.hbs');
+
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/news-scrapper';
