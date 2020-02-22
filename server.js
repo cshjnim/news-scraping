@@ -31,8 +31,6 @@ app.post('/user', [
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-
-  // create/update the user however you want?
 });
 
 

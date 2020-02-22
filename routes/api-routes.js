@@ -162,12 +162,13 @@ router.post('/removeNote', (req, res) => {
 
       // if not, then there was an error
       else {
-        res.send('An error occured while trying to remove the note');
+        res.send('An error ocurred while trying to remove the note');
       }
     })
-    .catch(() => res.send('An error occured while trying to remove the note'));
+    .catch(() => res.send('An error ocurred while trying to remove the note'));
 });
 
+//checkbody error 
 // deals with registration, error handling, and authentication of a new user
 router.post('/register', (req, res) => {
   // checks for valid form input and sends message to client if a field is invalid

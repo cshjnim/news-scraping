@@ -1,11 +1,6 @@
 const router = require('express').Router();
 const db = require('../models');
 
-// for all get routes, const obj = {} stores data needed to conditionally render info for the page
-// req.isAuthenticated() is used to check if the user is signed in or not
-// obj.auth is used to determine what parts of the nav items are displayed depending on if the user is authenticated or not
-// obj.page is used to add the active tab to the correct page on the navbar
-
 router.get('/', (req, res) => {
   const obj = {};
   obj.page = '/';
@@ -45,7 +40,7 @@ router.get('/saved', (req, res) => {
         obj.articles = result[0].savedArticles;
         res.render('saved.hbs', obj);
       })
-      .catch(() => res.send('An error occured while loading saved articles'));
+      .catch(() => res.send('An error ocurred while loading saved articles'));
 
     // this will render a 403 page if the user is not authenticated
   } else {
