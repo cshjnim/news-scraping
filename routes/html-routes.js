@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 
   // loads all articles when '/' is accessed
   db.Article.find()
+  .lean()
     .then(articles => {
       obj.articles = articles;
       res.render('index', obj);

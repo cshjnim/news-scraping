@@ -5,6 +5,9 @@ const Handlebars = require('handlebars')
 const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const { check, validationResult } = require('express-validator');
+const expressValidator = require('express-validator');
+// const { body,validationResult } = require('express-validator/check');
+// const { sanitizeBody } = require('express-validator/filter');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
@@ -23,15 +26,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // validates form submission
-app.post('/user', [
-  check('username').isEmail(),
-  check('password').isLength({ min: 5 })
-], (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  }
-});
+
+// var api = express.Router();
+// var expressValidator = require('express-validator');
+// api.use(expressValidator())
+app.use(expressValidator());
+
+// app.post('/user', [
+//   check('username').isEmail(),
+//   check('password').isLength({ min: 5 })
+// ], (req, res) => {
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     return res.status(422).json({ errors: errors.array() });
+//   }
+// });
 
 
 // saves the users session

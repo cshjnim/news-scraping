@@ -15,7 +15,7 @@ router.get('/scrape', (req, res) => {
       
       // data from the onion
       const $ = cheerio.load(response.data);
-      const items = $('article.js_post_item');
+      const items = $('article.cw4lnv-0');
       // console.log(items);
       items.each((i, ele) => console.log(ele));
       // stores title, image, and link for each article
@@ -27,6 +27,10 @@ router.get('/scrape', (req, res) => {
           .text();
 
         article.img = $(element)
+          .children()
+          .children()
+          .children()
+          .children()
           .children()
           .find('img')
           .attr('src');
@@ -168,7 +172,8 @@ router.post('/removeNote', (req, res) => {
     .catch(() => res.send('An error ocurred while trying to remove the note'));
 });
 
-//checkbody error 
+//checkbody error - need to solve
+
 // deals with registration, error handling, and authentication of a new user
 router.post('/register', (req, res) => {
   // checks for valid form input and sends message to client if a field is invalid
