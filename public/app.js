@@ -56,7 +56,7 @@ $(document).ready(function() {
       var self = $(this);
       $.ajax({
         url: '/removeArticle',
-        data: { id: $(this).attr('data-id') },
+        data: { id: self.attr('data-id') },
         type: 'DELETE',
         success: function(result) {
           // removes the div containing the article
@@ -68,10 +68,11 @@ $(document).ready(function() {
         }
       });
     });
-  
+    console.log('=========================line 71===============================')
     // sends new note info to db, and articleId when the save-note button is pressed in the modal. shows result message
     $('.save-note').on('click', function(e) {
       e.preventDefault();
+      console.log('===================CLICKING SAVE NOTE==================');
       $.post(
         '/saveNote',
         {
@@ -93,8 +94,12 @@ $(document).ready(function() {
       );
     });
   
+    console.log('=========================line 97===============================')
     // gets all notes from the db for an article based on the articleId.
-    $('.view-note').on('click', function() {
+    $('.view-note').on('click', function(e) {
+      e.preventDefault();
+      console.log('===================CLICKING VIEW NOTE==================');
+      var self = $(this);
       // removes the previous notes on each click
       $('#all-article-notes').empty();
   
@@ -102,7 +107,7 @@ $(document).ready(function() {
       $('#all-article-notes').append(`<div class="loader"></div>`);
   
       // sends data to get the notes associated with the article
-      $.post('/getArticleNotes', { articleId: $(this).attr('data-id') }, function(result) {
+      $.post('/getArticleNotes', { articleId: self.attr('data-id') }, function(result) {
         // checking the type ensures the request for the notes was successful.
   
         // if it was unsuccessful the type will be a string.

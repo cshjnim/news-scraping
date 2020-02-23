@@ -37,6 +37,7 @@ router.get('/saved', (req, res) => {
     db.User.find({ _id: req.user._id })
       // grabs all saved articles based on the articleId in the savedArticles array saved to the user document
       .populate('savedArticles')
+      .lean()
       .then(result => {
         obj.articles = result[0].savedArticles;
         res.render('saved.hbs', obj);

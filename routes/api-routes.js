@@ -29,12 +29,10 @@ router.get('/scrape', (req, res) => {
         article.img = $(element)
           .children()
           .children()
-          .children()
           .find('img')
           .attr('data-src');
 
         article.link = $(element)
-          .children()
           .children()
           .children()
           .find('a')
@@ -42,22 +40,8 @@ router.get('/scrape', (req, res) => {
 
         article.excerpt = $(element)
           .children()
-          .children()
-          .children()
-          .find('div')
-          .first()
+          .find('div.PromoLarge-description')
           .text();
-
-          // article.title = $(element).text();
-
-          // article.img = $(element).parent().parent().parent().parent().find('img').attr('src');
-  
-          // article.link = $(element).parent().attr('href');
-  
-          // article.excerpt = $(element)
-          //   .find('.excerpt')
-          //   .first()
-          //   .text();
 
         // prevents duplicate articles by checking if the article title exists in the db
         // if the article title does not exist, then it saves the article
