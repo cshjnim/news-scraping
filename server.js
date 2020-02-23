@@ -78,7 +78,7 @@ app.set('view engine', '.hbs');
 
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/news-scrapper';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://user:password@ds217548.mlab.com:17548/heroku_j6ghb064';
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
