@@ -10,12 +10,12 @@ const LocalStrategy = require('passport-local').Strategy;
 // gets articles from the onion
 router.get('/scrape', (req, res) => {
   axios
-    .get('https://www.theonion.com/latest')
+    .get('https://www.latimes.com/california')
     .then(response => {
       
       // data from the onion
       const $ = cheerio.load(response.data);
-      const items = $('article.cw4lnv-0');
+      const items = $('div.PromoLarge-wrapper');
       // console.log(items);
       items.each((i, ele) => console.log(ele));
       // stores title, image, and link for each article
@@ -23,20 +23,17 @@ router.get('/scrape', (req, res) => {
         const article = {};
 
         article.title = $(element)
-          .children().children().children().find('h2')
+          .children().children().children().find('a')
           .text();
 
         article.img = $(element)
           .children()
           .children()
           .children()
-          .children()
-          .children()
           .find('img')
-          .attr('src');
+          .attr('data-src');
 
         article.link = $(element)
-          .children()
           .children()
           .children()
           .children()
@@ -47,8 +44,7 @@ router.get('/scrape', (req, res) => {
           .children()
           .children()
           .children()
-          .children()
-          .find('p')
+          .find('div')
           .first()
           .text();
 
@@ -95,6 +91,7 @@ router.get('/clear', (req, res) => {
 // associates an article to a user when the save article button is pressed
 router.post('/saveArticle', (req, res) => {
   // prevents an attempt to save an article without being authenticated
+  console.log('request body',req.body)
   if (req.user) {
     // saves to the savedArticles array on the User schema
     User.update({ _id: req.user._id }, { $addToSet: { savedArticles: req.body.id } }, { new: true })

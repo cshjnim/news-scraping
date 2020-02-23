@@ -1,22 +1,26 @@
 $(document).ready(function() {
     var articleId = null;
-  
+  console.log('=========================line 3===============================')
     $('.text-success').fadeOut(1800, function() {
       // Animation complete.
     });
   
+    console.log('=========================line 8===============================')
+
     // removes result message on close and brings back the textarea for the save-note modal.
     $('#save-note-modal').on('hidden.bs.modal', function(e) {
       $('#result-msg').remove();
       $('#new-note-text').show();
       $('.save-note').show();
     });
-  
+    console.log('=========================line 16===============================')
+
     // used to send the article id to the server when creating a new note
     $('.create-note, .view-note').on('click', function() {
       articleId = $(this).attr('data-id');
     });
-  
+    console.log('=========================line 22===============================')
+
     // gets articles from the onion, and displays them
     $('#scrape').on('click', function() {
       $('.article-container').empty();
@@ -27,12 +31,20 @@ $(document).ready(function() {
         displayArticles(data);
       });
     });
-  
+    console.log('=========================line 34===============================')
+
     // saves an article to the user
-    $(document).on('click', '.save-article', function() {
+    $('#ancestorDiv').on('click','.save-article' , function(e) {
+      // e.preventDefault();
+      console.log(e)
+      console.log('===================CLICKING SAVE==================');
       var self = $(this);
+      
+      console.log(self)
+      console.log(self.attr('data-id'))
       // sends article id to the server to save article to the user
-      $.post('/saveArticle', { id: $(this).attr('data-id') }, function(data) {
+      $.post('/saveArticle', { id: self.attr('data-id') }, function(data) {
+        console.log(data);
         // sends a message to the user saying it was saved, then removes the save article button
         $(`<p class="text-success mt-2">${data}</p>`).insertAfter(self);
         self.remove();
