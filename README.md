@@ -83,4 +83,3 @@ Date: February 16,2020
 5. Contain a link to a deployed version of the app &check;
 6. Clearly list the technologies used in the app &check;
 7. State your role in the app development &check;
-
